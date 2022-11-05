@@ -1,6 +1,5 @@
 from colorama import Fore
 
-import time
 
 def mainmenu(patientstatus, username):
     global firstchoice
@@ -64,7 +63,7 @@ def mainmenu(patientstatus, username):
                         updatepatientchangestatus2 = input("Change patient's status to: ")
                         patientstatus[updatepatientchangename2] = patientstatus[updatepatientaskname]
                         del patientstatus[updatepatientaskname]
-                        patientstatus[updatepatientaskname] = updatepatientchangestatus2
+                        patientstatus[updatepatientchangename2] = updatepatientchangestatus2
                         print("Changing Name and Status Success!")
                         returntomenu(patientstatus, username)
                     except:
@@ -85,7 +84,8 @@ def hospitalterminalstartup(user, password, username, pwd, patientstatus):
 
     else:
         print("Invalid Username or Password")
-        hospitalterminalstartup(terminallogin, terminalpass, username, pwd, PatientStatus)
+
+
 
 PatientStatus = {
 
