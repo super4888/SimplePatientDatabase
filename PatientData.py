@@ -13,9 +13,7 @@ def mainmenu(patientstatus, username):
     mainchoice = input(Fore.YELLOW + "Select Your Choice >> ")
     if mainchoice == "1":
         print(patientstatus)
-        firstchoice = input(Fore.YELLOW + "Return to main menu? (Press Enter): ")
-        if firstchoice == "e" or "EE":
-            mainmenu(patientstatus, username)
+        returntomenu(patientstatus, username)
     if mainchoice == "2":
         print(Fore.YELLOW + """
         1. Add Patient Data
@@ -28,10 +26,56 @@ def mainmenu(patientstatus, username):
             adddatastatus = input("Add Patient Status: ")
             patientstatus[adddataname] = adddatastatus
             print("Patient Added!")
-            secondchoicereturn = input("Return to main menu? (Press Enter): ")
-            if secondchoicereturn == "e" or "ee":
-                mainmenu(patientstatus, username)
+            returntomenu(patientstatus, username)
+        if secondchoice == "2":
+                updatepatientaskname = input("Which Patient do you wanna modify: ")
+                if updatepatientaskname in patientstatus:
+                    print(Fore.YELLOW + """
+                    1. Change Patient Name
+                    2. Change Patient Status
+                    3. Change Patient Name and Status
+                    """)
+                    updatepatientchoice = input(Fore.YELLOW + "Select Your Choice >> ")
+                    if updatepatientchoice == "1":
+                            try:
+                                updatepatientchangename = input("Change patient name to: ")
+                                patientstatus[updatepatientchangename] = patientstatus[updatepatientaskname]
+                                del patientstatus[updatepatientaskname]
+                                print("Success!")
+                                returntomenu(patientstatus, username)
+                            except:
+                                print("Changing Name failed")
+                                returntomenu(patientstatus, username)
+                    if updatepatientchoice == "2":
+                        updatepatientchangestatus = input("Change patient's status to: ")
+                        try:
+                            patientstatus[updatepatientaskname] = updatepatientchangestatus
+                            print("Success!")
+                            returntomenu(patientstatus, username)
+                        except:
+                            print("Changing Status Failed")
+                            returntomenu(patientstatus, username)
+                else:
+                    print("Patient not found")
+                    returntomenu(patientstatus, username)
+                if updatepatientchoice == "3":
+                    try:
+                        updatepatientchangename2 = input("Change patient name to: ")
+                        updatepatientchangestatus2 = input("Change patient's status to: ")
+                        patientstatus[updatepatientchangename2] = patientstatus[updatepatientaskname]
+                        del patientstatus[updatepatientaskname]
+                        patientstatus[updatepatientaskname] = updatepatientchangestatus2
+                        print("Changing Name and Status Success!")
+                        returntomenu(patientstatus, username)
+                    except:
+                        print("Failed to change name or status")
+                        returntomenu(patientstatus, username)
 
+
+def returntomenu(patientstatus, username):
+    returntomenu = input("Return to main menu? (Press Enter): ")
+    if returntomenu == "e" or "EE":
+        mainmenu(patientstatus, username)
 
 def hospitalterminalstartup(user, password, username, pwd, patientstatus):
     if user == username:
@@ -41,7 +85,7 @@ def hospitalterminalstartup(user, password, username, pwd, patientstatus):
 
     else:
         print("Invalid Username or Password")
-
+        hospitalterminalstartup(terminallogin, terminalpass, username, pwd, PatientStatus)
 
 PatientStatus = {
 
