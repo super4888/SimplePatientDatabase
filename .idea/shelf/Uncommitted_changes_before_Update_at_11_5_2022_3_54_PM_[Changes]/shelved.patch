@@ -1,0 +1,72 @@
+Index: PatientData.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from colorama import Fore\r\n\r\nimport time\r\n\r\ndef mainmenu(patientstatus, username):\r\n    global firstchoice\r\n    print(Fore.YELLOW + \"Hello, \" + username + \" What would you like to do today?\")\r\n    print(Fore.YELLOW + \"\"\"\r\n    1. Check patient data\r\n    2. Add or Modify patient data\r\n    3. Shutdown\r\n    \"\"\")\r\n    mainchoice = input(Fore.YELLOW + \"Select Your Choice >> \")\r\n    if mainchoice == \"1\":\r\n        print(patientstatus)\r\n        returntomenu(patientstatus, username)\r\n    if mainchoice == \"2\":\r\n        print(Fore.YELLOW + \"\"\"\r\n        1. Add Patient Data\r\n        2. Update Patient Data\r\n        3. Remove Patient Data\r\n        \"\"\")\r\n        secondchoice = input(Fore.YELLOW + \"Select Your Choice >> \")\r\n        if secondchoice == \"1\":\r\n            adddataname = input(\"Add Patient name: \")\r\n            adddatastatus = input(\"Add Patient Status: \")\r\n            patientstatus[adddataname] = adddatastatus\r\n            print(\"Patient Added!\")\r\n            returntomenu(patientstatus, username)\r\n        if secondchoice == \"2\":\r\n                updatepatientaskname = input(\"Which Patient do you wanna modify: \")\r\n                if updatepatientaskname in patientstatus:\r\n                    print(Fore.YELLOW + \"\"\"\r\n                    1. Change Patient Name\r\n                    2. Change Patient Status\r\n                    3. Change Patient Name and Status\r\n                    \"\"\")\r\n                    updatepatientchoice = input(Fore.YELLOW + \"Select Your Choice >> \")\r\n                    if updatepatientchoice == \"1\":\r\n                            try:\r\n                                updatepatientchangename = input(\"Change patient name to: \")\r\n                                patientstatus[updatepatientchangename] = patientstatus[updatepatientaskname]\r\n                                del patientstatus[updatepatientaskname]\r\n                                print(\"Success!\")\r\n                                returntomenu(patientstatus, username)\r\n                            except:\r\n                                print(\"Changing Name failed\")\r\n                                returntomenu(patientstatus, username)\r\n                    if updatepatientchoice == \"2\":\r\n                        updatepatientchangestatus = input(\"Change patient's status to: \")\r\n                        try:\r\n                            patientstatus[updatepatientaskname] = updatepatientchangestatus\r\n                            print(\"Success!\")\r\n                            returntomenu(patientstatus, username)\r\n                        except:\r\n                            print(\"Changing Status Failed\")\r\n                            returntomenu(patientstatus, username)\r\n                else:\r\n                    print(\"Patient not found\")\r\n                    returntomenu(patientstatus, username)\r\n                if updatepatientchoice == \"3\":\r\n                    try:\r\n                        updatepatientchangename2 = input(\"Change patient name to: \")\r\n                        updatepatientchangestatus2 = input(\"Change patient's status to: \")\r\n                        patientstatus[updatepatientchangename2] = patientstatus[updatepatientaskname]\r\n                        del patientstatus[updatepatientaskname]\r\n                        patientstatus[updatepatientaskname] = updatepatientchangestatus2\r\n                        print(\"Changing Name and Status Success!\")\r\n                        returntomenu(patientstatus, username)\r\n                    except:\r\n                        print(\"Failed to change name or status\")\r\n                        returntomenu(patientstatus, username)\r\n\r\n\r\ndef returntomenu(patientstatus, username):\r\n    returntomenu = input(\"Return to main menu? (Press Enter): \")\r\n    if returntomenu == \"e\" or \"EE\":\r\n        mainmenu(patientstatus, username)\r\n\r\ndef hospitalterminalstartup(user, password, username, pwd, patientstatus):\r\n    if user == username:\r\n        if password == pwd:\r\n            print(Fore.YELLOW + \"Logged in\")\r\n            mainmenu(patientstatus, username)\r\n\r\n    else:\r\n        print(\"Invalid Username or Password\")\r\n        hospitalterminalstartup(terminallogin, terminalpass, username, pwd, PatientStatus)\r\n\r\nPatientStatus = {\r\n\r\n}\r\n\r\nusername = \"super\"\r\npwd = \"super221009\"\r\n\r\nterminallogin = input(Fore.CYAN + \"Enter your Username: \")\r\nterminalpass = input(Fore.CYAN + \"Enter your Password: \")\r\n\r\nhospitalterminalstartup(terminallogin, terminalpass, username, pwd, PatientStatus)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PatientData.py b/PatientData.py
+--- a/PatientData.py	(revision a4e7c88afe428cff98b1fb31ae9bf4450fde8baa)
++++ b/PatientData.py	(date 1667637922364)
+@@ -1,6 +1,5 @@
+ from colorama import Fore
+ 
+-import time
+ 
+ def mainmenu(patientstatus, username):
+     global firstchoice
+@@ -64,7 +63,7 @@
+                         updatepatientchangestatus2 = input("Change patient's status to: ")
+                         patientstatus[updatepatientchangename2] = patientstatus[updatepatientaskname]
+                         del patientstatus[updatepatientaskname]
+-                        patientstatus[updatepatientaskname] = updatepatientchangestatus2
++                        patientstatus[updatepatientchangename2] = updatepatientchangestatus2
+                         print("Changing Name and Status Success!")
+                         returntomenu(patientstatus, username)
+                     except:
+@@ -85,7 +84,8 @@
+ 
+     else:
+         print("Invalid Username or Password")
+-        hospitalterminalstartup(terminallogin, terminalpass, username, pwd, PatientStatus)
++
++
+ 
+ PatientStatus = {
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"6d16ccbd-3d6f-4fa0-bf2f-e61fd0829e80\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/PatientData.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/PatientData.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2H6q74FvHC8hsRzXxebRAq0Zsh6\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"last_opened_file_path\": \"C:/Users/Admin/Desktop/SimplePatientDatabase\",\r\n    \"settings.editor.selected.configurable\": \"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"6d16ccbd-3d6f-4fa0-bf2f-e61fd0829e80\" name=\"Changes\" comment=\"\" />\r\n      <created>1667615710079</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667615710079</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"e\">\r\n      <created>1667630319168</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667630319168</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"ChangeReadme\">\r\n      <created>1667630819410</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667630819410</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"e\" />\r\n    <MESSAGE value=\"ChangeReadme\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"ChangeReadme\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a4e7c88afe428cff98b1fb31ae9bf4450fde8baa)
++++ b/.idea/workspace.xml	(date 1667638277298)
+@@ -54,7 +54,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667630819410</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="doing more stuff">
++      <created>1667637440767</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1667637440767</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -71,6 +78,7 @@
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="e" />
+     <MESSAGE value="ChangeReadme" />
+-    <option name="LAST_COMMIT_MESSAGE" value="ChangeReadme" />
++    <MESSAGE value="doing more stuff" />
++    <option name="LAST_COMMIT_MESSAGE" value="doing more stuff" />
+   </component>
+ </project>
+\ No newline at end of file
