@@ -69,6 +69,9 @@ def mainmenu(patientstatus, username):
                     except:
                         print("Failed to change name or status")
                         returntomenu(patientstatus, username)
+    if mainchoice == "3":
+        print(Fore.GREEN + "Shutting Down.....")
+        exit()
 
 
 def returntomenu(patientstatus, username):
