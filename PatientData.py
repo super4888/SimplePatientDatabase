@@ -69,6 +69,16 @@ def mainmenu(patientstatus, username):
                     except:
                         print("Failed to change name or status")
                         returntomenu(patientstatus, username)
+        if secondchoice == "3":
+            removepatientaskname = input("Which patient data do you wanna remove: ")
+            if removepatientaskname in PatientStatus:
+                try:
+                    del PatientStatus[removepatientaskname]
+                    print("Remove success!")
+                    returntomenu(patientstatus, username)
+                except:
+                    print("Fail to remove patient data")
+                    returntomenu(patientstatus, username)
     if mainchoice == "3":
         print(Fore.GREEN + "Shutting Down.....")
         exit()
